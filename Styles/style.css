@@ -8,4 +8,21 @@ body {
 .heading-logo {
   font-family: "Roboto ExtraBold", sans-serif;
   font-weight: 800;
+}
+
+.carousel-inner {
+  height: 500px; /* Set your desired height */
+}
+
+.carousel-item img {
+  height: 100%; /* Make the image fill the height */
+  -o-object-fit: cover;
+     object-fit: cover; /* Ensures the image scales properly without distortion */
+  width: 100%; /* Maintain full width */
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
 }/*# sourceMappingURL=style.css.map */

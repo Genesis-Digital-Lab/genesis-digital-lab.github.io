@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Primary Meta Tags -->
+    <title>Engineering Hacks</title>
+    <meta name="description"
+        content="This is a demo of a static navbar using Bootstrap and AngularJS, complete with dynamic header and footer.">
+
+    <!-- Open Graph Meta Tags (for social sharing) -->
+    <meta property="og:title" content="Bootstrap Static Navbar Example">
+    <meta property="og:description"
+        content="Learn how to create a static navbar using Bootstrap with dynamic content rendered via AngularJS.">
+    <meta property="og:image" content="https://example.com/thumbnail.jpg">
+    <meta property="og:url" content="https://example.com">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Bootstrap Static Navbar Example">
+    <meta name="twitter:description"
+        content="Learn how to create a static navbar using Bootstrap with dynamic content rendered via AngularJS.">
+    <meta name="twitter:image" content="https://example.com/thumbnail.jpg">
+
+    <!-- Canonical URL -->
+    <link rel="canonical" href="https://example.com">
+    <!-- Favicon -->
+    <link rel="icon" type="image/png" href="https://example.com/favicon.png">
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- AngularJS -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="/Styles/style.css">
+
+</head>
+
+<body ng-app="genesis" ng-controller="myCtrl">
+    <!-- Header -->
+    <div class="m-4" id="header">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-md-12">
+
+            <div id="carouselExample" class="carousel slide">
+  <div class="carousel-inner">
+    <div class="carousel-item active">
+      <img src="https://swarajya.gumlet.io/swarajya/2019-03/2f47c76f-3e3e-443e-a536-7eca7b1dafd4/dlanor_s_703975_unsplash.jpg?w=610&q=50&compress=true&format=auto" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://static.vecteezy.com/system/resources/thumbnails/006/198/868/small_2x/computer-virus-malware-and-hacker-attack-concept-photo.jpg" class="d-block w-100" alt="...">
+    </div>
+    <div class="carousel-item">
+      <img src="https://img.freepik.com/premium-vector/green-matrix-background-stream-binary-code-falling-numbers-dark-backdrop-digital-computer-code-coding-hacking-vector-illustration_698341-259.jpg?semt=ais_hybrid" class="d-block w-100" alt="">
+    </div>
+  </div>
+  <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Previous</span>
+  </button>
+  <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+    <span class="visually-hidden">Next</span>
+  </button>
+</div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+    <!-- Footer -->
+    <div id="footer">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+    <!-- Client-side Script -->
+    <script src="/Scripts/client.js"></script>
+</body>
+
+</html>

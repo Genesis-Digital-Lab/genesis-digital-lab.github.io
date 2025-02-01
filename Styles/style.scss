@@ -29,3 +29,19 @@ body {
   font-family: $font-heading;
     font-weight: $font-weight-800;
 }
+
+.carousel-inner {
+    height: 500px; /* Set your desired height */
+  }
+
+  .carousel-item img {
+    height: 100%; /* Make the image fill the height */
+    object-fit: cover; /* Ensures the image scales properly without distortion */
+    width: 100%; /* Maintain full width */
+  }
+
+  body, html {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
