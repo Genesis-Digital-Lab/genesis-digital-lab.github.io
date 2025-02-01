@@ -13,7 +13,7 @@ const SECRET_KEY = "{{SECRET_KEY_PLACEHOLDER}}";
 // Use SECRET_KEY in your logic
 console.log("The secret key is: ", SECRET_KEY);
 
-    fetch('header.html')
+    fetch('/src/header.html')
         .then(response => response.text())
         .then(data => {
             console.log(data)
