@@ -1,4 +1,10 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+* {
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
 body {
   background-color: black;
   font-family: "Roboto SemiBold", sans-serif;
@@ -7,7 +13,7 @@ body {
 
 .heading-logo {
   font-family: "Roboto ExtraBold", sans-serif;
-  font-weight: 800;
+  font-weight: 700;;
 }
 
 .carousel-inner {
@@ -25,4 +31,37 @@ body, html {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.banner-section {
+  margin: 1.5rem !important;
+}
+
+.social-section {
+  margin: 1.5rem 0rem 1.5rem 0rem !important;
 }/*# sourceMappingURL=style.css.map */
+
+.header-bottom {
+  border-top: 0 px;
+}
+
+.mt-banner{
+  margin-top: 4.5rem !important;
+}
+
+
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.image-container img {
+  opacity: 0;
+  animation: fadeZoomIn 0.7s ease-out forwards;
+}
