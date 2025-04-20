@@ -30,7 +30,7 @@ app.controller("myCtrl", function($scope) {
         "target": "_blank"
       },
       {
-        "title": "JSON - CSV Convertor",
+        "title": "JSON - CSV Convertor.",
         "href": "json_csv_conversion.html",
         "target": "_blank"
       },
