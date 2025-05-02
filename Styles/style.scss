@@ -1,5 +1,26 @@
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
 
+// Light Theme
+$background-light: #ffffff;
+$text-light: #121212;
+$primary-light: #007bff;
+
+// Dark Theme
+$background-dark: #121212;
+$text-dark: #ffffff;
+$primary-dark: #1e90ff;
+
+:root {
+  --background-color: #{$background-light};
+  --text-color: #{$text-light};
+  --primary-color: #{$primary-light};
+}
+
+[data-theme="dark"] {
+  --background-color: #{$background-dark};
+  --text-color: #{$text-dark};
+  --primary-color: #{$primary-dark};
+}
 
 //Font Styles
 $font-heading: 'Roboto ExtraBold', sans-serif;
@@ -65,4 +86,273 @@ body {
 
 .social-section{
   margin: 1.5rem 0rem 1.5rem 0rem !important;
+}
+
+
+
+/* New SCSS and Mapping*/
+
+// Colors
+$color-black: #000;
+$color-white: #fff;
+$color-dark-gray: #333;
+$color-primary: #007bff;
+
+// Fonts
+$font-roboto: "Roboto", sans-serif;
+$font-noto-sans: "Noto Sans", sans-serif;
+$font-oswald: "Oswald", sans-serif;
+
+// Font Weights
+$font-weight-regular: 400;
+$font-weight-bold: 700;
+
+// Spacing
+$spacing-xs: 0.5rem;
+$spacing-sm: 1rem;
+$spacing-md: 1.5rem;
+$spacing-lg: 4.5rem;
+
+// Sizes
+$carousel-height: 270px;
+$header-height: 25px;
+$theme-toggle-size: 2rem;
+
+// Theme Toggle Icon Fill Colors
+$icon-fill-light: hsl(210, 10%, 30%);
+$icon-fill-light-hover: hsl(210, 10%, 15%);
+$icon-fill-dark: hsl(210, 10%, 70%);
+$icon-fill-dark-hover: hsl(210, 15%, 90%);
+
+
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: $color-black;
+  font-family: $font-roboto;
+  font-weight: $font-weight-regular;
+}
+
+.heading-logo {
+  font-family: $font-roboto;
+  font-weight: $font-weight-bold;
+}
+
+.banner-section, .social-section {
+  margin: $spacing-md !important;
+}
+
+.mt-banner {
+  margin-top: $spacing-lg !important;
+}
+
+.header-container {
+  height: $header-height;
+}
+
+.carousel-wrapper {
+  margin-top: 30px;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  height: $carousel-height;
+  overflow: hidden;
+}
+
+.carousel-item img, .carousel-image {
+  height: 100%;
+  width: 100%;
+  object-fit: cover;
+  filter: brightness(0.5);
+}
+
+.carousel-caption-custom {
+  position: absolute;
+  bottom: 40px;
+  left: 0;
+  padding: $spacing-sm;
+  width: 100%;
+  color: $color-white;
+  z-index: 2;
+}
+
+.carousel-title,
+.carousel-description {
+  margin: $spacing-sm 0;
+}
+
+.carousel-description {
+  inline-size: 500px;
+  overflow-wrap: break-word;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: $spacing-sm $spacing-md;
+  background-color: $color-primary;
+  color: $color-white;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 3;
+  position: relative;
+
+  a {
+    color: $color-white;
+    text-decoration: none;
+  }
+}
+
+.carousel-control-prev, .carousel-control-next {
+  top: 91%;
+  transform: translateY(-50%);
+}
+
+footer {
+  background-color: $color-dark-gray;
+  color: $color-white;
+  padding: $spacing-md;
+  text-align: center;
+}
+
+// Fade Zoom Animation
+@keyframes fadeZoomIn {
+  0% {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.image-container img {
+  opacity: 0;
+  animation: fadeZoomIn 0.7s ease-out forwards;
+}
+
+// Dark Theme Toggle Button
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  inline-size: $theme-toggle-size;
+  block-size: $theme-toggle-size;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: 5px;
+  --icon-fill: #{$icon-fill-light};
+  --icon-fill-hover: #{$icon-fill-light-hover};
+
+  svg {
+    inline-size: 100%;
+    block-size: 100%;
+    stroke-linecap: round;
+  }
+
+  @media (hover: none) {
+    --size: 48px;
+  }
+
+  [data-theme="dark"] & {
+    --icon-fill: #{$icon-fill-dark};
+    --icon-fill-hover: #{$icon-fill-dark-hover};
+  }
+}
+
+.sun-and-moon {
+  > .moon, 
+  > .sun, 
+  > .sun-beams {
+    transform-origin: center;
+  }
+
+  > .moon, 
+  > .sun {
+    fill: var(--icon-fill);
+  }
+
+  > .sun-beams {
+    stroke: var(--icon-fill);
+    stroke-width: 2px;
+  }
+}
+
+.theme-toggle:is(:hover, :focus-visible) {
+  .sun-and-moon {
+    > .moon, 
+    > .sun {
+      fill: var(--icon-fill-hover);
+    }
+    > .sun-beams {
+      stroke: var(--icon-fill-hover);
+    }
+  }
+}
+
+[data-theme="dark"] {
+  .sun-and-moon {
+    > .sun {
+      transform: scale(1.75);
+    }
+    > .sun-beams {
+      opacity: 0;
+    }
+    > .moon > circle {
+      transform: translateX(-7px);
+    }
+  }
+}
+
+@supports (cx: 1) {
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    cx: 17;
+    transform: translateX(0);
+  }
+}
+
+// Animation for theme toggle
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun {
+    transition: transform .5s var(--ease-elastic-3);
+  }
+  .sun-and-moon > .sun-beams {
+    transition: transform .5s var(--ease-elastic-4), opacity .5s var(--ease-3);
+  }
+  .sun-and-moon .moon > circle {
+    transition: transform .25s var(--ease-out-5);
+  }
+
+  @supports (cx: 1) {
+    .sun-and-moon .moon > circle {
+      transition: cx .25s var(--ease-out-5);
+    }
+  }
+
+  [data-theme="dark"] .sun-and-moon > .sun {
+    transition-timing-function: var(--ease-3);
+    transition-duration: .25s;
+  }
+  [data-theme="dark"] .sun-and-moon > .sun-beams {
+    transition-duration: .15s;
+    transform: rotateZ(-25deg);
+  }
+  [data-theme="dark"] .sun-and-moon > .moon > circle {
+    transition-duration: .5s;
+    transition-delay: .25s;
+  }
 }

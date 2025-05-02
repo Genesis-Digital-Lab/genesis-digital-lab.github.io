@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Signature Generator</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&family=Pacifico&family=Great+Vibes&family=Shadows+Into+Light&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+  <!-- Signature Pad -->
+  <script src="https://cdn.jsdelivr.net/npm/signature_pad@4.1.6/dist/signature_pad.umd.min.js"></script>
+
+  
+        <!-- AngularJS -->
+        <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+  <style>
+    body {
+      background-color: #121212;
+      color: white;
+      font-family: 'Open Sans', sans-serif;
+    }
+
+    canvas {
+      background-color: white;
+      border-radius: 8px;
+      border: 1px solid #444;
+      width: 100%;
+      height: 300px;
+    }
+
+    textarea, input, select {
+      background-color: #1e1e1e;
+      color: white;
+      border: 1px solid #444;
+    }
+
+    .output-area {
+      background-color: #ffffff;
+      color: #000000;
+      padding: 1rem;
+      border-radius: 0.5rem;
+    }
+
+    .font-sample {
+      font-size: 2em;
+    }
+
+    .font-pacifico { font-family: 'Pacifico', cursive; }
+    .font-vibes { font-family: 'Great Vibes', cursive; }
+    .font-shadows { font-family: 'Shadows Into Light', cursive; }
+    .font-sans { font-family: 'Open Sans', sans-serif; }
+  </style>
+</head>
+
+<body class="dark-bg">
+
+  
+  <div class="container-fluid">
+    <div id="header" class="header-container">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+</div>
+
+  <div class="container-fluid py-4">
+    <h2 class="mb-4 text-center mt-5 fw-bold">Signature Generator</h2>
+
+    <div class="row">
+      <!-- Left Column: Freehand Drawing -->
+      <div class="col-md-6 mb-4">
+        <label class="form-label fw-bold">Draw your signature:</label>
+        <canvas id="sigCanvas"></canvas>
+
+        <label class="form-label mt-2">Signature Color:</label>
+        <input type="color" id="colorPicker" value="#000000" class="form-control form-control-color w-25" />
+
+        <div class="mt-3 d-flex gap-2 flex-wrap">
+          <button class="btn btn-danger" onclick="clearCanvas()">Clear</button>
+          <button class="btn btn-success" onclick="downloadCanvas()">Download</button>
+          <button class="btn btn-outline-light" onclick="copyBase64()">Copy Base64</button>
+          <button class="btn btn-outline-light" onclick="copyImageTag()">Copy <img> Tag</button>
+        </div>
+      </div>
+
+      <!-- Right Column: Typed Signature -->
+      <div class="col-md-6">
+        <label class="form-label fw-bold">Type your signature:</label>
+        <input type="text" class="form-control mb-2" id="typedSig" placeholder="Your Name" oninput="updateSignature()" />
+
+        <label class="form-label fw-bold">Font Style:</label>
+        <select class="form-select mb-2" id="fontSelect" onchange="updateSignature()">
+          <option value="font-pacifico">Pacifico</option>
+          <option value="font-vibes">Great Vibes</option>
+          <option value="font-shadows">Shadows Into Light</option>
+          <option value="font-sans">Open Sans</option>
+        </select>
+
+        <label class="form-label fw-bold">Color:</label>
+        <input type="color" id="typedColor" value="#000000" class="form-control form-control-color w-25 mb-2" onchange="updateSignature()" />
+
+        <div id="sigOutput" class="output-area text-center font-sample font-pacifico" style="color: #000000;">
+          Your Signature
+        </div>
+      </div>
+    </div>
+  </div>
+
+      <!-- Footer -->
+      <div id="footer">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+        <!-- Client-side Script -->
+        <script src="/Scripts/client.js"></script>
+
+  <script>
+    const canvas = document.getElementById('sigCanvas');
+    const signaturePad = new SignaturePad(canvas, { backgroundColor: 'white', penColor: '#000' });
+
+    const colorPicker = document.getElementById('colorPicker');
+    colorPicker.addEventListener('change', () => {
+      signaturePad.penColor = colorPicker.value;
+    });
+
+    function clearCanvas() {
+      signaturePad.clear();
+    }
+
+    function downloadCanvas() {
+      const dataURL = signaturePad.toDataURL();
+      const link = document.createElement('a');
+      link.href = dataURL;
+      link.download = 'signature.png';
+      link.click();
+    }
+
+    function copyBase64() {
+      const base64 = signaturePad.toDataURL();
+      navigator.clipboard.writeText(base64);
+      alert("Base64 copied!");
+    }
+
+    function copyImageTag() {
+      const base64 = signaturePad.toDataURL();
+      const tag = `<img src="${base64}" alt="Signature" />`;
+      navigator.clipboard.writeText(tag);
+      alert("<img> tag copied!");
+    }
+
+    function updateSignature() {
+      const text = document.getElementById('typedSig').value || 'Your Signature';
+      const font = document.getElementById('fontSelect').value;
+      const color = document.getElementById('typedColor').value;
+      const output = document.getElementById('sigOutput');
+
+      output.textContent = text;
+      output.className = `output-area text-center font-sample ${font}`;
+      output.style.color = color;
+    }
+
+    window.onload = () => {
+      canvas.width = canvas.offsetWidth;
+      canvas.height = 300;
+    };
+  </script>
+</body>
+</html>

@@ -1,8 +1,30 @@
 @import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&family=Oswald:wght@200..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+:root {
+  --background-color: #ffffff;
+  --text-color: #121212;
+  --primary-color: #007bff;
+}
+
+[data-theme=dark] {
+  --background-color: #121212;
+  --text-color: #ffffff;
+  --primary-color: #1e90ff;
+}
+
 * {
   margin: 0px;
   padding: 0px;
   box-sizing: border-box;
+}
+
+.helplink-txt{
+  color: var(--text-color);
+  text-decoration: none;
+}
+
+.helplink-bg{
+  background-color: var(--background-color);
 }
 
 body {
@@ -13,18 +35,7 @@ body {
 
 .heading-logo {
   font-family: "Roboto ExtraBold", sans-serif;
-  font-weight: 700;;
-}
-
-/* .carousel-inner {
-  height: 500px; /* Set your desired height */
-/* } */ */
-
-.carousel-item img {
-  height: 100%; /* Make the image fill the height */
-  -o-object-fit: cover;
-     object-fit: cover; /* Ensures the image scales properly without distortion */
-  width: 100%; /* Maintain full width */
+  font-weight: 800;
 }
 
 body, html {
@@ -39,28 +50,146 @@ body, html {
 
 .social-section {
   margin: 1.5rem 0rem 1.5rem 0rem !important;
-}/*# sourceMappingURL=style.css.map */
-
-.header-bottom {
-  border-top: 0 px;
 }
 
-.mt-banner{
+/* New SCSS and Mapping*/
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  background-color: #000;
+  font-family: "Roboto", sans-serif;
+  font-weight: 400;
+}
+
+.heading-logo {
+  font-family: "Roboto", sans-serif;
+  font-weight: 700;
+}
+
+.banner-section, .social-section {
+  margin: 1.5rem !important;
+}
+
+.mt-banner {
   margin-top: 4.5rem !important;
 }
 
+.header-container {
+  height: 25px;
+}
 
-@keyframes fadeZoomIn {
-  0% {
-    opacity: 0;
-    transform: scale(0.8);
+.theme-toggle {
+  background: none;
+  border: none;
+  padding: 0;
+  inline-size: 2rem;
+  block-size: 2rem;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  cursor: pointer;
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+  outline-offset: 5px;
+  --icon-fill: hsl(210, 10%, 30%);
+  --icon-fill-hover: hsl(210, 10%, 15%);
+}
+.theme-toggle svg {
+  inline-size: 100%;
+  block-size: 100%;
+  stroke-linecap: round;
+}
+@media (hover: none) {
+  .theme-toggle {
+    --size: 48px;
   }
-  100% {
-    opacity: 1;
-    transform: scale(1);
+}
+[data-theme=dark] .theme-toggle {
+  --icon-fill: hsl(210, 10%, 70%);
+  --icon-fill-hover: hsl(210, 15%, 90%);
+}
+
+
+/* Toogle Theme Switch Style Starts Here */
+.sun-and-moon > .moon,
+.sun-and-moon > .sun,
+.sun-and-moon > .sun-beams {
+  transform-origin: center;
+}
+.sun-and-moon > .moon,
+.sun-and-moon > .sun {
+  fill: var(--icon-fill);
+}
+.sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill);
+  stroke-width: 2px;
+}
+
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .moon,
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun {
+  fill: var(--icon-fill-hover);
+}
+.theme-toggle:is(:hover, :focus-visible) .sun-and-moon > .sun-beams {
+  stroke: var(--icon-fill-hover);
+}
+
+[data-theme=dark] .sun-and-moon > .sun {
+  transform: scale(1.75);
+}
+[data-theme=dark] .sun-and-moon > .sun-beams {
+  opacity: 0;
+}
+[data-theme=dark] .sun-and-moon > .moon > circle {
+  transform: translateX(-7px);
+}
+
+@supports (cx: 1) {
+  [data-theme=dark] .sun-and-moon > .moon > circle {
+    cx: 17;
+    transform: translateX(0);
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .sun-and-moon > .sun {
+    transition: transform 0.5s var(--ease-elastic-3);
+  }
+  .sun-and-moon > .sun-beams {
+    transition: transform 0.5s var(--ease-elastic-4), opacity 0.5s var(--ease-3);
+  }
+  .sun-and-moon .moon > circle {
+    transition: transform 0.25s var(--ease-out-5);
+  }
+  @supports (cx: 1) {
+    .sun-and-moon .moon > circle {
+      transition: cx 0.25s var(--ease-out-5);
+    }
+  }
+  [data-theme=dark] .sun-and-moon > .sun {
+    transition-timing-function: var(--ease-3);
+    transition-duration: 0.25s;
+  }
+  [data-theme=dark] .sun-and-moon > .sun-beams {
+    transition-duration: 0.15s;
+    transform: rotateZ(-25deg);
+  }
+  [data-theme=dark] .sun-and-moon > .moon > circle {
+    transition-duration: 0.5s;
+    transition-delay: 0.25s;
   }
 }
 
+/* Toogle Theme Switch Style Ends Here */
+
+
+
+/* Carsouel Style Starts Here */
 .image-container img {
   opacity: 0;
   animation: fadeZoomIn 0.7s ease-out forwards;
@@ -155,4 +284,17 @@ body, html {
   transform: translateY(-50%);
 }
 
+/* Carsouel Style Ends Here */
 
+
+/* Footer Style Starts Here */
+
+footer {
+  padding: 1rem;
+  text-align: center;
+  font-size: 0.9rem;
+  color: #aaa;
+  border-top: 1px solid #333;
+}
+
+/* Footer Style Ends Here */

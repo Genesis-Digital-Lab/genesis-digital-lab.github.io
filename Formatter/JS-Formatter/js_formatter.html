@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JavaScript Beautifier</title>
+
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;700&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" />
+
+
+      <!-- AngularJS -->
+      <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
+      <style>
+        body {
+            background-color: #121212;
+            color: #fff;
+        }
+
+        textarea {
+            background-color: #1e1e1e;
+            color: #fff;
+            border: 1px solid #444;
+            resize: vertical;
+        }
+
+        pre {
+            white-space: pre-wrap;
+            word-wrap: break-word;
+            background-color: #1e1e1e;
+            color: #000000;
+            padding: 10px;
+            border-radius: 5px;
+            border: 1px solid #444;
+        }
+
+        .json-box {
+            height: 65vh;
+            /* Set your desired height */
+            overflow-y: auto;
+            /* Enable vertical scrolling if content overflows */
+            resize: none;
+            /* Optional: disable manual resizing for textarea */
+        }
+
+        #output {
+            height: 65vh;
+            overflow-y: auto;
+            white-space: pre-wrap;
+        }
+
+        .output-area {
+            background-color: #ffffff;
+            color: #000000;
+            padding: 1rem;
+            height: 65vh;
+            overflow-y: auto;
+            border-radius: 0.5rem;
+        }
+    </style>
+
+</head>
+
+<body ng-app="genesis" ng-controller="genesis-controller" class="dark-bg">
+
+    <div class="container-fluid">
+        <div id="header" class="header-container">
+            <!-- Dynamic content will be loaded here -->
+        </div>
+    </div>
+  <div class="container-fluid py-4">
+    <h2 class="mb-4 text-center mt-5 fw-bold">JavaScript Beautifier Tool</h2>
+
+    <div class="row">
+      <!-- Left Column: Input and Buttons -->
+      <div class="col-md-6">
+        <div class="mb-3">
+          <label for="jsInput" class="form-label fw-bold">Enter JavaScript:</label>
+          <textarea class="form-control json-box" id="jsInput" rows="15"
+            placeholder='function hello(){console.log("Hello World!");}'></textarea>
+        </div>
+
+        <div class="mb-3 d-flex flex-wrap gap-2">
+            <button class="btn btn-primary" onclick="beautifyJS()">Beautify</button>
+            <button class="btn btn-secondary" onclick="minifyJS()">Minify</button>
+            <button class="btn btn-warning" onclick="clearOutput()">Clear</button>
+          </div>
+      </div>
+
+      <!-- Right Column: Output -->
+      <div class="col-md-6">
+        <div class="d-flex justify-content-between align-items-center mb-2">
+          <span class="fw-bold">Result</span>
+          <span onclick="copyToClipboard()" title="Copy to Clipboard" role="button" class="text-white"
+            style="cursor:pointer;">
+            <i class="fa fa-copy"></i> Copy
+          </span>
+        </div>
+
+        <pre id="output" class="bg-light p-3 rounded border"
+          style="min-height: 350px; white-space: pre-wrap;"></pre>
+
+        <!-- <div class="output-area" id="jseditor"></div> -->
+      </div>
+    </div>
+  </div>
+    <!-- Footer -->
+    <div id="footer">
+        <!-- Dynamic content will be loaded here -->
+    </div>
+
+        <!-- Client-side Script -->
+        <script src="/Scripts/client.js"></script>
+
+  <!-- Scripts -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify-css.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify-html.js"></script>
+
+  <script>
+    function beautifyJS() {
+      const input = document.getElementById('jsInput').value.trim();
+      const output = document.getElementById('output');
+  
+      if (!input) {
+        output.textContent = "🥹 Please enter JavaScript to beautify.";
+        return;
+      }
+  
+      try {
+        const beautified = js_beautify(input, { indent_size: 2 });
+        output.textContent = beautified;
+      } catch (e) {
+        output.textContent = "❌ Error: " + e.message;
+      }
+    }
+  
+    function unminifyJS() {
+      // Same logic as beautifyJS
+      beautifyJS();
+    }
+  
+    function minifyJS() {
+      const input = document.getElementById('jsInput').value.trim();
+      const output = document.getElementById('output');
+  
+      if (!input) {
+        output.textContent = "🥹 Please enter JavaScript to minify.";
+        return;
+      }
+  
+      try {
+        const minified = input
+          .replace(/\s+/g, ' ')
+          .replace(/\s*([{};,:=()<>+\-*\/])\s*/g, '$1')
+          .trim();
+        output.textContent = minified;
+      } catch (e) {
+        output.textContent = "❌ Error: " + e.message;
+      }
+    }
+  
+    function clearOutput() {
+      document.getElementById('output').textContent = "";
+    }
+  
+    function copyToClipboard() {
+      const text = document.getElementById('output').textContent;
+      const temp = document.createElement('textarea');
+      temp.value = text;
+      document.body.appendChild(temp);
+      temp.select();
+      document.execCommand('copy');
+      document.body.removeChild(temp);
+    }
+  </script>
+  
+</body>
+
+</html>

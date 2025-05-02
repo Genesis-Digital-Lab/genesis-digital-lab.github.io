@@ -1,75 +1,87 @@
 <!DOCTYPE html>
-<html lang="en">
-  <!-- Google Tag Manager -->
-<script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-  new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-  j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-  'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-  })(window,document,'script','dataLayer','GTM-WHXSF5LH');</script>
-  <!-- End Google Tag Manager -->
+<html lang="en" data-theme="light">
+
+<!-- Google Tag Manager -->
+<script>(function (w, d, s, l, i) {
+    w[l] = w[l] || []; w[l].push({
+      'gtm.start':
+        new Date().getTime(), event: 'gtm.js'
+    }); var f = d.getElementsByTagName(s)[0],
+      j = d.createElement(s), dl = l != 'dataLayer' ? '&l=' + l : ''; j.async = true; j.src =
+        'https://www.googletagmanager.com/gtm.js?id=' + i + dl; f.parentNode.insertBefore(j, f);
+  })(window, document, 'script', 'dataLayer', 'GTM-WHXSF5LH');</script>
+<!-- End Google Tag Manager -->
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  <!-- Favicon -->
-  <link rel="icon" type="image/gif" href="Assets/gear.gif">
-
   <!-- Primary Meta Tags -->
   <title>Engineering Hacks - Tech Tips, How-To Guides, and Career Resources</title>
-  <meta name="description"
+  <!-- <meta name="description"
     content="Engineering Hacks provides tech tips, how-to guides, and career resources for students, IT professionals, and hobbyists. Learn how to land a job in the IT industry and improve your skills.">
   <meta name="keywords"
-    content="tech tips, IT career, how-to guides, engineering hacks, IT jobs, tech tutorials, coding tips, IT skills">
+    content="tech tips, IT career, how-to guides, engineering hacks, IT jobs, tech tutorials, coding tips, IT skills"> -->
+
+    <meta name="description"
+    content="IT Tools: free open-source suite—JSON formatter & validator, JSON-CSV/XML converter, PDF edit/e-sign, image & video conversion—fast UX for developers.">
+
+<meta name="author" content="One tab for every tool: JSON Viewer, Beautify, Validate, Issue Fixer, merge/e-sign, transform images & videos, and more in a sleek dark-theme interface.">
+
   <!-- Open Graph Meta Tags (for social sharing) -->
-  <meta property="og:title" content="Engineering Hacks - Tech Tips, How-To Guides, and Career Resources">
-  <meta property="og:description"
-    content="Engineering Hacks provides tech tips, how-to guides, and career resources for students, IT professionals, and hobbyists. Learn how to land a job in the IT industry and improve your skills.">
-  <meta property="og:image" content="https://engineeringhacks.org/thumbnail.jpg">
-  <meta property="og:url" content="https://engineeringhacks.org/">
-  <meta property="og:type" content="website">
-  <!-- Twitter Card Meta Tags -->
-  <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Engineering Hacks - Tech Tips, How-To Guides, and Career Resources">
-  <meta name="twitter:description"
-    content="Engineering Hacks provides tech tips, how-to guides, and career resources for students, IT professionals, and hobbyists. Learn how to land a job in the IT industry and improve your skills.">
-  <meta name="twitter:image" content="https://engineeringhacks.org/thumbnail.jpg">
+    <meta property="og:title" content="Free Online JSON Viewer, Formatter, and Converter | Engineering Hacks">
+    <meta property="og:description"
+          content="Format, beautify, validate, fix JSON issues, minify, and convert your JSON data online. Convert JSON to XML or CSV with this powerful and easy-to-use tool.">
+    <meta property="og:image" content="https://engineeringhacks.org/json-tool-thumbnail.jpg">
+    <meta property="og:url" content="https://engineeringhacks.org/json-tool">
+    <meta property="og:type" content="website">
+    
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Free Online JSON Formatter & Viewer Tool - Beautify, Validate, Convert">
+    <meta name="twitter:description"
+          content="Fast and simple JSON Viewer & Formatter. Beautify, validate, fix common JSON issues, and convert JSON to XML or CSV. Free and easy to use.">
+    <meta name="twitter:image" content="https://engineeringhacks.org/json-tool-thumbnail.jpg">
   <!-- Canonical URL -->
   <link rel="canonical" href="https://engineeringhacks.org/">
+
+
+
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+
 
   <!-- Bootstrap CSS -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
   <link rel="stylesheet" href="http://fonts.googleapis.com/css?family=Open+Sans:400italic,700italic,400,700">
-  <!-- AngularJS -->
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
 
   <!-- Bootstrap JS -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
-
-
   <link rel="stylesheet" href="assets/font-awesome/css/font-awesome.min.css">
-
   <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-
 
   <!-- Custom CSS -->
   <link rel="stylesheet" href="/Styles/style.css">
+
+
+
+
+
 </head>
 
 <script async src="https://www.googletagmanager.com/gtag/js?id=G-33M8S9CJLV"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
+  function gtag() { dataLayer.push(arguments); }
   gtag('js', new Date());
 
   gtag('config', 'G-33M8S9CJLV');
 </script>
 
-<body ng-app="genesis" ng-controller="myCtrl" class="dark-bg" >
+<body ng-app="genesis" ng-controller="genesis-controller" class="dark-bg">
   <!-- Header -->
-<!-- Google Tag Manager (noscript) -->
-<noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHXSF5LH"
-  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WHXSF5LH" height="0" width="0"
+      style="display:none;visibility:hidden"></iframe></noscript>
   <!-- End Google Tag Manager (noscript) -->
   <div class="container-fluid">
 
@@ -78,9 +90,9 @@
         <!-- Dynamic content will be loaded here -->
       </div>
     </div>
-    
+
     <div class="container-fluid carousel-wrapper">
- 
+
       <div class="row">
         <div id="carouselExampleIndicators" class="carousel slide" data-bs-ride="carousel">
           <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-bs-slide="prev">
@@ -93,15 +105,13 @@
           </a>
 
           <div class="carousel-inner">
-            <div class="carousel-item" ng-class="{'active': $index === 0}" 
-                 ng-repeat="slide in carouselObj track by slide.id"
-                 ng-if="slide.id !== undefined && slide.id !== null" interval="5000">
-    
+            <div class="carousel-item" ng-class="{'active': $index === 0}"
+              ng-repeat="slide in carouselObj track by slide.id" ng-if="slide.id !== undefined && slide.id !== null"
+              interval="5000">
+
               <div class="carousel-image-wrapper">
-                <img class="d-block w-100 carousel-image" 
-                     src="{{slide.image}}" 
-                     alt="{{slide.altText}}">
-    
+                <img class="d-block w-100 carousel-image" src="{{slide.image}}" alt="{{slide.altText}}">
+
                 <div class="carousel-caption carousel-caption-custom">
                   <h4 class="carousel-title">{{slide.title}}</h4>
                   <p class="carousel-description">{{slide.description}}</p>
@@ -110,11 +120,11 @@
                   </button>
                 </div>
               </div>
-    
+
             </div>
           </div>
         </div>
-    
+
 
       </div>
     </div>
@@ -124,44 +134,40 @@
         <div class="col-md-4 mt-4" style="color: white;">
           <h3>Tools Links</h3>
           <ul class="list-group">
-      
-            <li class="list-group-item list-group-item-dark" ng-repeat="link in helpfulLinks"><a style="text-decoration: none; color: #141619;" ng-href="{{link.href}}" target="{{link.target}}">{{link.title}}</a></li>
+            <!-- style="text-decoration: none; color: #141619;" class="list-group-item list-group-item-dark" -->
+
+            <li class="list-group-item list-group-item-dark helplink-bg" ng-repeat="link in helpfulLinks"><a ng-href="{{link.href}}"
+               class="helplink-txt" target="{{link.target}}">{{link.title}}</a></li>
           </ul>
         </div>
         <div class="col-md-4 mt-4" style="color: white;">
           <h3>How To</h3>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-dark">Cras justo odio</li>
-            <li class="list-group-item list-group-item-dark">Dapibus ac facilisis in</li>
-            <li class="list-group-item list-group-item-dark">Morbi leo risus</li>
-            <li class="list-group-item list-group-item-dark">Porta ac consectetur ac</li>
-            <li class="list-group-item list-group-item-dark">Vestibulum at eros</li>
+            <li class="list-group-item list-group-item-dark helplink-bg" ng-repeat="link in helpfulLinks"><a ng-href="{{link.href}}"
+              class="helplink-txt" target="{{link.target}}">{{link.title}}</a></li>
+         </ul>
           </ul>
 
         </div>
         <div class="col-md-4 mt-4" style="color: white;">
           <h3>Follow Us</h3>
           <ul class="list-group">
-            <li class="list-group-item list-group-item-dark">Cras justo odio</li>
-            <li class="list-group-item list-group-item-dark">Dapibus ac facilisis in</li>
-            <li class="list-group-item list-group-item-dark">Morbi leo risus</li>
-            <li class="list-group-item list-group-item-dark">Porta ac consectetur ac</li>
-            <li class="list-group-item list-group-item-dark">Vestibulum at eros</li>
+            <li class="list-group-item list-group-item-dark helplink-bg" ng-repeat="link in helpfulLinks"><a ng-href="{{link.href}}"
+              class="helplink-txt" target="{{link.target}}">{{link.title}}</a></li>
+         </ul>
           </ul>
         </div>
       </div>
     </div>
-    
- 
-  <!-- Footer -->
-  <div id="footer">
-    <!-- Dynamic content will be loaded here -->
-  </div>
 
 
+    <!-- Footer -->
+    <div id="footer">
+      <!-- Dynamic content will be loaded here -->
+    </div>
 
-  <!-- Client-side Script -->
-  <script src="/Scripts/client.js"></script>
+    <!-- Client-side Script -->
+    <script src="/Scripts/client.js"></script>
 </body>
 
 </html>
