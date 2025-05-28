@@ -46,6 +46,26 @@
   <link rel="stylesheet" href="Styles/header.css">
   <link rel="stylesheet" href="Styles/links.css">
   <link rel="stylesheet" href="Styles/main.css">
+
+  <style>
+    .links-list a {
+      color: rgba(255, 255, 255, 0.8) !important;
+      transition: color 0.3s ease;
+    }
+    
+    .links-list a:hover {
+      color: #ffffff !important;
+      transform: translateX(5px);
+    }
+
+    .social-links a {
+      color: rgba(255, 255, 255, 0.8) !important;
+    }
+
+    .social-links a:hover {
+      color: #ffffff !important;
+    }
+  </style>
 </head>
 
 <body ng-app="engineeringHacks" ng-controller="mainController">
@@ -80,16 +100,6 @@
   </header>
 
   <main>
-    <!-- <section class="hero-section">
-      <div class="container">
-        <div class="hero-content">
-          <h1>Free Developer Tools for Every Need</h1>
-          <p>A comprehensive suite of free online tools to make your development workflow faster and easier.</p>
-          <a href="#tools" class="cta-button">Explore Tools</a>
-        </div>
-      </div>
-    </section> -->
-
     <section class="carousel-section">
       <div class="container">
         <div class="carousel-container">
