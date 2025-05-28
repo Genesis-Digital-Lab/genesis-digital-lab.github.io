@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Image Editor - Engineering Hacks</title>
+  
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- Fabric.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fabric.js/5.3.1/fabric.min.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Styles/animations.css">
+  <link rel="stylesheet" href="Styles/carousel.css">
+  <link rel="stylesheet" href="Styles/footer.css">
+  <link rel="stylesheet" href="Styles/header.css">
+  <link rel="stylesheet" href="Styles/links.css">
+  <link rel="stylesheet" href="Styles/main.css">
+  <link rel="stylesheet" href="Styles/image-editor.css">
+</head>
+<body ng-app="engineeringHacks" ng-controller="imageEditorController">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container-fluid">
+      <div class="header-content">
+        <div class="logo">
+          <a href="/">
+            <span class="heading-logo">Engineering<span class="highlight">Hacks</span></span>
+          </a>
+        </div>
+        <div class="editor-actions">
+          <input type="text" class="form-control project-name" ng-model="projectName" placeholder="Untitled design">
+          <div class="action-buttons">
+            <button class="btn btn-outline-primary" ng-click="saveProject()">
+              <i class="fa fa-save"></i> Save
+            </button>
+            <button class="btn btn-primary" ng-click="exportImage()">
+              <i class="fa fa-download"></i> Download
+            </button>
+          </div>
+        </div>
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" ng-click="toggleTheme()">
+            <i class="fa" ng-class="{'fa-sun-o': theme === 'dark', 'fa-moon-o': theme === 'light'}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Editor Interface -->
+  <div class="editor-wrapper">
+    <!-- Left Sidebar -->
+    <div class="editor-sidebar left-sidebar">
+      <div class="sidebar-tabs">
+        <button class="tab-btn" ng-class="{active: activeTab === 'templates'}" ng-click="setActiveTab('templates')">
+          <i class="fa fa-grid-2"></i> Templates
+        </button>
+        <button class="tab-btn" ng-class="{active: activeTab === 'elements'}" ng-click="setActiveTab('elements')">
+          <i class="fa fa-shapes"></i> Elements
+        </button>
+        <button class="tab-btn" ng-class="{active: activeTab === 'uploads'}" ng-click="setActiveTab('uploads')">
+          <i class="fa fa-upload"></i> Uploads
+        </button>
+        <button class="tab-btn" ng-class="{active: activeTab === 'text'}" ng-click="setActiveTab('text')">
+          <i class="fa fa-text"></i> Text
+        </button>
+      </div>
+      
+      <div class="sidebar-content">
+        <!-- Templates Tab -->
+        <div class="tab-content" ng-show="activeTab === 'templates'">
+          <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search templates...">
+          </div>
+          <div class="templates-grid">
+            <div class="template-item" ng-repeat="template in templates" ng-click="loadTemplate(template)">
+              <img ng-src="{{template.thumbnail}}" alt="{{template.name}}">
+              <span>{{template.name}}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Elements Tab -->
+        <div class="tab-content" ng-show="activeTab === 'elements'">
+          <div class="search-box">
+            <input type="text" class="form-control" placeholder="Search elements...">
+          </div>
+          <div class="elements-grid">
+            <div class="element-category" ng-repeat="category in elementCategories">
+              <h6>{{category.name}}</h6>
+              <div class="element-items">
+                <div class="element-item" ng-repeat="element in category.elements" ng-click="addElement(element)">
+                  <img ng-src="{{element.thumbnail}}" alt="{{element.name}}">
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Uploads Tab -->
+        <div class="tab-content" ng-show="activeTab === 'uploads'">
+          <div class="upload-area" ng-click="triggerUpload()">
+            <i class="fa fa-cloud-upload"></i>
+            <p>Upload your images</p>
+            <span>or drag and drop</span>
+          </div>
+          <input type="file" id="imageInput" accept="image/*" style="display: none" onchange="angular.element(this).scope().handleImageUpload(event)">
+          <div class="uploads-grid">
+            <div class="upload-item" ng-repeat="image in uploadedImages" ng-click="addUploadedImage(image)">
+              <img ng-src="{{image.url}}" alt="Uploaded image">
+            </div>
+          </div>
+        </div>
+
+        <!-- Text Tab -->
+        <div class="tab-content" ng-show="activeTab === 'text'">
+          <button class="text-preset heading" ng-click="addText('heading')">Add a heading</button>
+          <button class="text-preset subheading" ng-click="addText('subheading')">Add a subheading</button>
+          <button class="text-preset body" ng-click="addText('body')">Add body text</button>
+          <div class="text-styles">
+            <h6>Text styles</h6>
+            <div class="style-presets">
+              <div class="style-preset" ng-repeat="style in textStyles" ng-click="applyTextStyle(style)">
+                <span style="{{style.preview}}">{{style.name}}</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Canvas Area -->
+    <div class="canvas-container">
+      <div class="canvas-toolbar">
+        <select class="form-select size-select" ng-model="selectedSize" ng-change="changeCanvasSize()">
+          <option value="custom">Custom size</option>
+          <option value="instagram-post">Instagram post</option>
+          <option value="instagram-story">Instagram story</option>
+          <option value="facebook-post">Facebook post</option>
+          <option value="twitter-post">Twitter post</option>
+        </select>
+        <div class="zoom-controls">
+          <button class="btn btn-sm btn-outline-secondary" ng-click="zoomOut()">
+            <i class="fa fa-minus"></i>
+          </button>
+          <span>{{zoomLevel}}%</span>
+          <button class="btn btn-sm btn-outline-secondary" ng-click="zoomIn()">
+            <i class="fa fa-plus"></i>
+          </button>
+        </div>
+      </div>
+      <div class="canvas-wrapper">
+        <canvas id="canvas"></canvas>
+      </div>
+    </div>
+
+    <!-- Right Sidebar -->
+    <div class="editor-sidebar right-sidebar" ng-show="selectedObject">
+      <div class="object-settings">
+        <h6>{{selectedObject.type | uppercase}} SETTINGS</h6>
+        
+        <!-- Image Settings -->
+        <div class="settings-group" ng-if="selectedObject.type === 'image'">
+          <label>Transparency</label>
+          <input type="range" class="form-range" min="0" max="100" ng-model="selectedObject.opacity" ng-change="updateObjectProperty('opacity')">
+          
+          <label>Filters</label>
+          <div class="filter-buttons">
+            <button class="filter-btn" ng-repeat="filter in imageFilters" ng-click="applyImageFilter(filter)">
+              <img ng-src="{{filter.preview}}" alt="{{filter.name}}">
+              <span>{{filter.name}}</span>
+            </button>
+          </div>
+        </div>
+
+        <!-- Text Settings -->
+        <div class="settings-group" ng-if="selectedObject.type === 'text'">
+          <label>Font</label>
+          <select class="form-select" ng-model="selectedObject.fontFamily" ng-change="updateObjectProperty('fontFamily')">
+            <option ng-repeat="font in fonts" value="{{font.value}}">{{font.name}}</option>
+          </select>
+
+          <label>Size</label>
+          <input type="number" class="form-control" ng-model="selectedObject.fontSize" ng-change="updateObjectProperty('fontSize')">
+
+          <label>Color</label>
+          <input type="color" class="form-control" ng-model="selectedObject.fill" ng-change="updateObjectProperty('fill')">
+
+          <div class="text-style-buttons">
+            <button class="btn btn-sm" ng-class="{'btn-primary': selectedObject.bold}" ng-click="toggleTextStyle('bold')">
+              <i class="fa fa-bold"></i>
+            </button>
+            <button class="btn btn-sm" ng-class="{'btn-primary': selectedObject.italic}" ng-click="toggleTextStyle('italic')">
+              <i class="fa fa-italic"></i>
+            </button>
+            <button class="btn btn-sm" ng-class="{'btn-primary': selectedObject.underline}" ng-click="toggleTextStyle('underline')">
+              <i class="fa fa-underline"></i>
+            </button>
+          </div>
+        </div>
+
+        <!-- Common Settings -->
+        <div class="settings-group">
+          <label>Layer</label>
+          <div class="layer-buttons">
+            <button class="btn btn-sm btn-outline-secondary" ng-click="moveLayer('up')">
+              <i class="fa fa-arrow-up"></i>
+            </button>
+            <button class="btn btn-sm btn-outline-secondary" ng-click="moveLayer('down')">
+              <i class="fa fa-arrow-down"></i>
+            </button>
+          </div>
+          
+          <button class="btn btn-danger w-100 mt-3" ng-click="deleteObject()">
+            <i class="fa fa-trash"></i> Delete
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts -->
+  <script src="Scripts/app.js"></script>
+  <script src="Scripts/image-editor.controller.js"></script>
+</body>
+</html>

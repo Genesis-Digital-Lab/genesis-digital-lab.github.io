@@ -1,0 +1,288 @@
+:root {
+  /* Color variables - ocean color palette */
+  --color-primary: #4A90E2; /* clear sky blue */
+  --color-primary-light: #68A5E9;
+  --color-primary-dark: #2E7ACC;
+  
+  --color-secondary: #5FB8D5; /* shallow water blue */
+  --color-secondary-light: #7CC7E0;
+  --color-secondary-dark: #3E9BB8;
+  
+  --color-accent: #34495E; /* deep ocean blue */
+  --color-accent-light: #4A6075;
+  --color-accent-dark: #2C3E50;
+  
+  --color-neutral: #85929E; /* ocean mist */
+
+  /* Success, Warning, Error */
+  --color-success: #2ECC71;
+  --color-success-light: #40D47E;
+  --color-success-dark: #27AE60;
+  
+  --color-warning: #F1C40F;
+  --color-warning-light: #F4D03F;
+  --color-warning-dark: #D4AC0D;
+  
+  --color-error: #E74C3C;
+  --color-error-light: #EC7063;
+  --color-error-dark: #C0392B;
+
+  /* Light theme */
+  --bg-light: #F5F7FA; /* ocean foam */
+  --text-light: #2C3E50; /* deep ocean */
+  --card-light: #FFFFFF;
+  --border-light: #E8F1F5;
+  --shadow-light: rgba(74, 144, 226, 0.1);
+  
+  /* Dark theme */
+  --bg-dark: #2C3E50; /* deep ocean */
+  --text-dark: #F5F7FA; /* ocean foam */
+  --card-dark: #34495E;
+  --border-dark: #456789;
+  --shadow-dark: rgba(0, 0, 0, 0.3);
+
+  /* Default theme (dark) */
+  --bg-color: var(--bg-dark);
+  --text-color: var(--text-dark);
+  --card-color: var(--card-dark);
+  --border-color: var(--border-dark);
+  --shadow-color: var(--shadow-dark);
+  
+  /* Typography */
+  --font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  --font-size-xs: 0.75rem;   /* 12px */
+  --font-size-sm: 0.875rem;  /* 14px */
+  --font-size-base: 1rem;    /* 16px */
+  --font-size-md: 1.125rem;  /* 18px */
+  --font-size-lg: 1.25rem;   /* 20px */
+  --font-size-xl: 1.5rem;    /* 24px */
+  --font-size-2xl: 1.875rem; /* 30px */
+  --font-size-3xl: 2.25rem;  /* 36px */
+  --font-size-4xl: 3rem;     /* 48px */
+  
+  /* Spacing - 8px system */
+  --spacing-1: 0.25rem;   /* 4px */
+  --spacing-2: 0.5rem;    /* 8px */
+  --spacing-3: 0.75rem;   /* 12px */
+  --spacing-4: 1rem;      /* 16px */
+  --spacing-5: 1.25rem;   /* 20px */
+  --spacing-6: 1.5rem;    /* 24px */
+  --spacing-8: 2rem;      /* 32px */
+  --spacing-10: 2.5rem;   /* 40px */
+  --spacing-12: 3rem;     /* 48px */
+  --spacing-16: 4rem;     /* 64px */
+  
+  /* Border radius */
+  --radius-sm: 0.25rem;   /* 4px */
+  --radius-md: 0.5rem;    /* 8px */
+  --radius-lg: 1rem;      /* 16px */
+  --radius-full: 9999px;
+  
+  /* Transitions */
+  --transition-fast: 150ms ease;
+  --transition-normal: 250ms ease;
+  --transition-slow: 350ms ease;
+  
+  /* Container */
+  --container-width: 1200px;
+  --container-padding: var(--spacing-4);
+}
+
+/* Light theme */
+[data-theme="light"] {
+  --bg-color: var(--bg-light);
+  --text-color: var(--text-light);
+  --card-color: var(--card-light);
+  --border-color: var(--border-light);
+  --shadow-color: var(--shadow-light);
+}
+
+/* Reset & Base styles */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: var(--font-family);
+  font-size: var(--font-size-base);
+  line-height: 1.5;
+  color: var(--text-color);
+  background-color: var(--bg-color);
+  transition: color var(--transition-normal), background-color var(--transition-normal);
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin-bottom: var(--spacing-4);
+  font-weight: 600;
+}
+
+h1 {
+  font-size: var(--font-size-3xl);
+}
+
+h2 {
+  font-size: var(--font-size-2xl);
+}
+
+h3 {
+  font-size: var(--font-size-xl);
+}
+
+h4 {
+  font-size: var(--font-size-lg);
+}
+
+p {
+  margin-bottom: var(--spacing-4);
+}
+
+a {
+  color: var(--color-primary);
+  text-decoration: none;
+  transition: color var(--transition-fast);
+}
+
+a:hover {
+  color: var(--color-primary-light);
+}
+
+ul, ol {
+  list-style-position: inside;
+  margin-bottom: var(--spacing-4);
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button {
+  cursor: pointer;
+  font-family: var(--font-family);
+}
+
+/* Container */
+.container {
+  width: 100%;
+  max-width: var(--container-width);
+  margin: 0 auto;
+  padding: 0 var(--container-padding);
+}
+
+/* Section styles */
+section {
+  padding: var(--spacing-12) 0;
+}
+
+/* Utility classes */
+.highlight {
+  color: var(--color-primary);
+}
+
+.cta-button {
+  display: inline-block;
+  background-color: var(--color-primary);
+  color: white;
+  padding: var(--spacing-3) var(--spacing-6);
+  border-radius: var(--radius-md);
+  font-weight: 500;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+  border: none;
+  text-align: center;
+}
+
+.cta-button:hover {
+  background-color: var(--color-primary-light);
+  color: white;
+  transform: translateY(-2px);
+}
+
+.cta-button:active {
+  transform: translateY(0);
+}
+
+/* Hero Section */
+.hero-section {
+  padding: var(--spacing-16) 0;
+  text-align: center;
+  background: linear-gradient(135deg, var(--color-primary-dark), var(--color-primary));
+  color: white;
+  margin-top: 70px; /* Adjust for fixed header */
+}
+
+.hero-content {
+  max-width: 800px;
+  margin: 0 auto;
+}
+
+.hero-content h1 {
+  font-size: var(--font-size-4xl);
+  margin-bottom: var(--spacing-6);
+  animation: fadeIn 0.8s ease-out;
+}
+
+.hero-content p {
+  font-size: var(--font-size-lg);
+  margin-bottom: var(--spacing-8);
+  opacity: 0.9;
+  animation: fadeIn 0.8s ease-out 0.2s forwards;
+  opacity: 0;
+}
+
+.hero-content .cta-button {
+  animation: fadeInUp 0.8s ease-out 0.4s forwards;
+  opacity: 0;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-xl);
+  }
+  
+  h3 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--font-size-3xl);
+  }
+  
+  .hero-content p {
+    font-size: var(--font-size-base);
+  }
+  
+  section {
+    padding: var(--spacing-8) 0;
+  }
+}
+
+@media (max-width: 480px) {
+  h1 {
+    font-size: var(--font-size-xl);
+  }
+  
+  h2 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .hero-content h1 {
+    font-size: var(--font-size-2xl);
+  }
+  
+  .container {
+    padding: 0 var(--spacing-3);
+  }
+}

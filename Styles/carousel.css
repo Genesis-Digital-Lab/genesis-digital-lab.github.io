@@ -1,0 +1,215 @@
+/* Carousel Styles */
+.carousel-section {
+  padding: var(--spacing-12) 0;
+}
+
+.carousel-container {
+  position: relative;
+  margin: 0 auto;
+  max-width: 1000px;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-lg);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+}
+
+.carousel-slides {
+  position: relative;
+  height: 450px;
+}
+
+.carousel-slide {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity var(--transition-slow);
+}
+
+.carousel-slide.active {
+  opacity: 1;
+  z-index: 1;
+}
+
+.carousel-image-wrapper {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.carousel-image-wrapper img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(0.6);
+  transition: transform var(--transition-slow);
+}
+
+.carousel-slide.active .carousel-image-wrapper img {
+  transform: scale(1.05);
+}
+
+.carousel-caption {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding: var(--spacing-8);
+  color: white;
+  z-index: 2;
+  text-align: left;
+}
+
+.carousel-caption h4 {
+  font-size: var(--font-size-2xl);
+  margin-bottom: var(--spacing-4);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow) 0.3s, transform var(--transition-slow) 0.3s;
+}
+
+.carousel-caption p {
+  font-size: var(--font-size-md);
+  margin-bottom: var(--spacing-6);
+  max-width: 600px;
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow) 0.5s, transform var(--transition-slow) 0.5s;
+}
+
+.carousel-caption .cta-button {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity var(--transition-slow) 0.7s, transform var(--transition-slow) 0.7s, 
+              background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.carousel-slide.active .carousel-caption h4,
+.carousel-slide.active .carousel-caption p,
+.carousel-slide.active .carousel-caption .cta-button {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Carousel Controls */
+.carousel-controls {
+  position: absolute;
+  bottom: var(--spacing-6);
+  right: var(--spacing-6);
+  display: flex;
+  align-items: center;
+  z-index: 10;
+}
+
+.carousel-control {
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: background-color var(--transition-fast);
+}
+
+.carousel-control:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.arrow {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-top: 2px solid white;
+  border-right: 2px solid white;
+}
+
+.arrow.left {
+  transform: rotate(-135deg);
+}
+
+.arrow.right {
+  transform: rotate(45deg);
+}
+
+.carousel-indicators {
+  display: flex;
+  gap: var(--spacing-2);
+  margin: 0 var(--spacing-4);
+}
+
+.indicator {
+  width: 10px;
+  height: 10px;
+  border-radius: var(--radius-full);
+  background: rgba(255, 255, 255, 0.3);
+  border: none;
+  cursor: pointer;
+  transition: background-color var(--transition-fast), transform var(--transition-fast);
+}
+
+.indicator:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+
+.indicator.active {
+  background: white;
+  transform: scale(1.2);
+}
+
+/* Responsive Carousel */
+@media (max-width: 768px) {
+  .carousel-slides {
+    height: 350px;
+  }
+  
+  .carousel-caption {
+    padding: var(--spacing-4);
+  }
+  
+  .carousel-caption h4 {
+    font-size: var(--font-size-xl);
+  }
+  
+  .carousel-caption p {
+    font-size: var(--font-size-base);
+    max-width: 100%;
+  }
+  
+  .carousel-controls {
+    bottom: var(--spacing-4);
+    right: var(--spacing-4);
+  }
+}
+
+@media (max-width: 480px) {
+  .carousel-slides {
+    height: 300px;
+  }
+  
+  .carousel-caption h4 {
+    font-size: var(--font-size-lg);
+  }
+  
+  .carousel-caption p {
+    margin-bottom: var(--spacing-4);
+  }
+  
+  .carousel-control {
+    width: 36px;
+    height: 36px;
+  }
+  
+  .indicator {
+    width: 8px;
+    height: 8px;
+  }
+}
