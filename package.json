@@ -1,0 +1,32 @@
+{
+  "name": "engineering-hacks-tools",
+  "version": "1.0.0",
+  "description": "A comprehensive web application with Resume Builder and Meme Editor functionality for software developers and students",
+  "main": "index.html",
+  "scripts": {
+    "dev": "live-server --port=3000 --host=0.0.0.0 --no-browser",
+    "start": "live-server --port=3000 --host=0.0.0.0 --no-browser",
+    "build": "echo 'No build process needed for static site'",
+    "serve": "live-server --port=3000 --host=0.0.0.0 --no-browser"
+  },
+  "keywords": [
+    "resume-builder",
+    "meme-editor",
+    "developer-tools",
+    "json-formatter",
+    "web-tools"
+  ],
+  "author": "Engineering Hacks",
+  "license": "MIT",
+  "devDependencies": {
+    "live-server": "^1.2.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/engineering-hacks/tools"
+  },
+  "homepage": "https://engineeringhacks.org",
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}
