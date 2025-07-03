@@ -5,21 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <!-- Primary Meta Tags -->
-  <title>Engineering Hacks - Tech Tips, How-To Guides, and Career Resources</title>
-  <meta name="description" content="IT Tools: free open-source suite—JSON formatter & validator, JSON-CSV/XML converter, PDF edit/e-sign, image & video conversion—fast UX for developers.">
-  <meta name="author" content="One tab for every tool: JSON Viewer, Beautify, Validate, Issue Fixer, merge/e-sign, transform images & videos, and more in a sleek dark-theme interface.">
+  <title>Engineering Hacks - Developer Tools, Resume Builder & Meme Editor</title>
+  <meta name="description" content="Free developer tools including Resume Builder, Meme Editor, JSON formatter, and more. Plus latest tech news and free courses for students.">
+  <meta name="author" content="Engineering Hacks - Your one-stop destination for developer tools and resources">
 
-  <!-- Open Graph Meta Tags (for social sharing) -->
-  <meta property="og:title" content="Free Online JSON Viewer, Formatter, and Converter | Engineering Hacks">
-  <meta property="og:description" content="Format, beautify, validate, fix JSON issues, minify, and convert your JSON data online. Convert JSON to XML or CSV with this powerful and easy-to-use tool.">
+  <!-- Open Graph Meta Tags -->
+  <meta property="og:title" content="Engineering Hacks - Developer Tools & Resources">
+  <meta property="og:description" content="Build professional resumes, create memes, format JSON, and access free developer courses. Everything you need as a developer or student.">
   <meta property="og:image" content="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg">
-  <meta property="og:url" content="https://engineeringhacks.org/json-tool">
+  <meta property="og:url" content="https://engineeringhacks.org">
   <meta property="og:type" content="website">
   
   <!-- Twitter Card Meta Tags -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Free Online JSON Formatter & Viewer Tool - Beautify, Validate, Convert">
-  <meta name="twitter:description" content="Fast and simple JSON Viewer & Formatter. Beautify, validate, fix common JSON issues, and convert JSON to XML or CSV. Free and easy to use.">
+  <meta name="twitter:title" content="Engineering Hacks - Developer Tools & Resources">
+  <meta name="twitter:description" content="Build professional resumes, create memes, format JSON, and access free developer courses.">
   <meta name="twitter:image" content="https://images.pexels.com/photos/546819/pexels-photo-546819.jpeg">
   
   <!-- Canonical URL -->
@@ -46,26 +46,7 @@
   <link rel="stylesheet" href="Styles/header.css">
   <link rel="stylesheet" href="Styles/links.css">
   <link rel="stylesheet" href="Styles/main.css">
-
-  <style>
-    .links-list a {
-      color: rgba(255, 255, 255, 0.8) !important;
-      transition: color 0.3s ease;
-    }
-    
-    .links-list a:hover {
-      color: #ffffff !important;
-      transform: translateX(5px);
-    }
-
-    .social-links a {
-      color: rgba(255, 255, 255, 0.8) !important;
-    }
-
-    .social-links a:hover {
-      color: #ffffff !important;
-    }
-  </style>
+  <link rel="stylesheet" href="CSS/home.css">
 </head>
 
 <body ng-app="engineeringHacks" ng-controller="mainController">
@@ -81,8 +62,10 @@
         <nav class="main-nav" ng-class="{'active': isMenuOpen}">
           <ul>
             <li><a href="fomatting-tools.html">Tools</a></li>
-            <li><a href="#how-to">How To</a></li>
-            <li><a href="#about">About</a></li>
+            <li><a href="resume-builder.html">Resume Builder</a></li>
+            <li><a href="meme-editor.html">Meme Editor</a></li>
+            <li><a href="#news">News</a></li>
+            <li><a href="#courses">Courses</a></li>
             <li><a href="#contact">Contact</a></li>
           </ul>
         </nav>
@@ -100,57 +83,173 @@
   </header>
 
   <main>
-    <section class="carousel-section">
+    <!-- Hero Section -->
+    <section class="hero-section">
       <div class="container">
-        <div class="carousel-container">
-          <div id="feature-carousel" class="carousel">
-            <div class="carousel-slides">
-              <div class="carousel-slide" ng-repeat="slide in carouselSlides" ng-class="{'active': $index === currentSlide}">
-                <div class="carousel-image-wrapper">
-                  <img ng-src="{{slide.image}}" alt="{{slide.alt}}">
-                  <div class="carousel-caption">
-                    <h4>{{slide.title}}</h4>
-                    <p>{{slide.description}}</p>
-                    <a ng-href="{{slide.link}}" class="cta-button">{{slide.buttonText}}</a>
-                  </div>
-                </div>
-              </div>
+        <div class="hero-content animate-on-scroll fade-up">
+          <h1>Build Your Future with <span class="highlight">Engineering Hacks</span></h1>
+          <p>Professional resume builder, creative meme editor, powerful developer tools, and free learning resources - all in one place.</p>
+          <div class="hero-actions">
+            <a href="resume-builder.html" class="cta-button primary">
+              <i class="fa fa-file-text"></i> Build Resume
+            </a>
+            <a href="meme-editor.html" class="cta-button secondary">
+              <i class="fa fa-image"></i> Create Memes
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Tools Section -->
+    <section class="main-tools-section">
+      <div class="container">
+        <h2 class="section-title animate-on-scroll fade-up">Featured Tools</h2>
+        <div class="tools-grid">
+          <div class="tool-card animate-on-scroll fade-up delay-1" ng-click="navigateToTool('resume-builder.html')">
+            <div class="tool-icon">
+              <i class="fa fa-file-text"></i>
             </div>
-            <div class="carousel-controls">
-              <button class="carousel-control prev" aria-label="Previous slide" ng-click="prevSlide()">
-                <span class="arrow left"></span>
-              </button>
-              <div class="carousel-indicators">
-                <button class="indicator" ng-repeat="slide in carouselSlides" ng-class="{'active': $index === currentSlide}" ng-click="goToSlide($index)" aria-label="Slide {{$index + 1}}"></button>
-              </div>
-              <button class="carousel-control next" aria-label="Next slide" ng-click="nextSlide()">
-                <span class="arrow right"></span>
-              </button>
+            <h3>Resume Builder</h3>
+            <p>Create professional resumes with Fortune 500 company templates. Export as PDF, DOC, or HTML.</p>
+            <div class="tool-features">
+              <span class="feature-tag">Professional Templates</span>
+              <span class="feature-tag">Multiple Formats</span>
+              <span class="feature-tag">ATS Friendly</span>
+            </div>
+            <div class="tool-action">
+              <span>Start Building <i class="fa fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="tool-card animate-on-scroll fade-up delay-2" ng-click="navigateToTool('meme-editor.html')">
+            <div class="tool-icon">
+              <i class="fa fa-image"></i>
+            </div>
+            <h3>Meme Editor</h3>
+            <p>Design viral memes with customizable layouts, text, and images. Perfect for social media content.</p>
+            <div class="tool-features">
+              <span class="feature-tag">Grid Layouts</span>
+              <span class="feature-tag">Custom Text</span>
+              <span class="feature-tag">High Quality Export</span>
+            </div>
+            <div class="tool-action">
+              <span>Create Memes <i class="fa fa-arrow-right"></i></span>
+            </div>
+          </div>
+
+          <div class="tool-card animate-on-scroll fade-up delay-3" ng-click="navigateToTool('fomatting-tools.html')">
+            <div class="tool-icon">
+              <i class="fa fa-code"></i>
+            </div>
+            <h3>Developer Tools</h3>
+            <p>JSON formatter, validators, converters, and more essential tools for developers.</p>
+            <div class="tool-features">
+              <span class="feature-tag">JSON Tools</span>
+              <span class="feature-tag">Validators</span>
+              <span class="feature-tag">Converters</span>
+            </div>
+            <div class="tool-action">
+              <span>Explore Tools <i class="fa fa-arrow-right"></i></span>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <section class="links-section" id="tools">
+    <!-- Developer News Section -->
+    <section class="news-section" id="news">
       <div class="container">
-        <div class="links-container">
+        <h2 class="section-title animate-on-scroll fade-up">Latest Developer News</h2>
+        <div class="news-grid">
+          <article class="news-card animate-on-scroll fade-up delay-1" ng-repeat="article in developerNews">
+            <div class="news-image">
+              <img ng-src="{{article.image}}" alt="{{article.title}}">
+              <div class="news-category">{{article.category}}</div>
+            </div>
+            <div class="news-content">
+              <h3>{{article.title}}</h3>
+              <p>{{article.excerpt}}</p>
+              <div class="news-meta">
+                <span class="news-date">{{article.date}}</span>
+                <a ng-href="{{article.url}}" target="_blank" class="news-link">
+                  Read More <i class="fa fa-external-link"></i>
+                </a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <div class="news-footer">
+          <a href="#" class="btn btn-outline-primary">View All News</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Free Courses Section -->
+    <section class="courses-section" id="courses">
+      <div class="container">
+        <h2 class="section-title animate-on-scroll fade-up">Free Courses for Students</h2>
+        <p class="section-subtitle animate-on-scroll fade-up delay-1">Level up your skills with these hand-picked free courses</p>
+        
+        <div class="courses-categories">
+          <button class="category-btn active" ng-class="{'active': selectedCategory === 'all'}" ng-click="filterCourses('all')">All</button>
+          <button class="category-btn" ng-class="{'active': selectedCategory === 'programming'}" ng-click="filterCourses('programming')">Programming</button>
+          <button class="category-btn" ng-class="{'active': selectedCategory === 'web-dev'}" ng-click="filterCourses('web-dev')">Web Development</button>
+          <button class="category-btn" ng-class="{'active': selectedCategory === 'data-science'}" ng-click="filterCourses('data-science')">Data Science</button>
+          <button class="category-btn" ng-class="{'active': selectedCategory === 'mobile'}" ng-click="filterCourses('mobile')">Mobile Dev</button>
+        </div>
+
+        <div class="courses-grid">
+          <div class="course-card animate-on-scroll fade-up" ng-repeat="course in filteredCourses" ng-show="course.visible">
+            <div class="course-image">
+              <img ng-src="{{course.image}}" alt="{{course.title}}">
+              <div class="course-level">{{course.level}}</div>
+              <div class="course-duration">{{course.duration}}</div>
+            </div>
+            <div class="course-content">
+              <div class="course-provider">{{course.provider}}</div>
+              <h3>{{course.title}}</h3>
+              <p>{{course.description}}</p>
+              <div class="course-skills">
+                <span class="skill-tag" ng-repeat="skill in course.skills">{{skill}}</span>
+              </div>
+              <div class="course-footer">
+                <div class="course-rating">
+                  <div class="stars">
+                    <i class="fa fa-star" ng-repeat="star in getStars(course.rating)"></i>
+                  </div>
+                  <span>{{course.rating}} ({{course.reviews}} reviews)</span>
+                </div>
+                <a ng-href="{{course.url}}" target="_blank" class="course-btn">
+                  Start Free <i class="fa fa-external-link"></i>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Quick Links Section -->
+    <section class="quick-links-section">
+      <div class="container">
+        <div class="quick-links-container">
           <div class="links-column">
-            <h3>Tools Links</h3>
+            <h3>Developer Tools</h3>
             <ul class="links-list">
-              <li ng-repeat="tool in tools"><a ng-href="{{tool.url}}">{{tool.name}}</a></li>
+              <li ng-repeat="tool in developerTools"><a ng-href="{{tool.url}}">{{tool.name}}</a></li>
             </ul>
           </div>
-          <div class="links-column" id="how-to">
-            <h3>How To</h3>
+          <div class="links-column">
+            <h3>Learning Resources</h3>
             <ul class="links-list">
-              <li ng-repeat="guide in guides"><a ng-href="{{guide.url}}">{{guide.name}}</a></li>
+              <li ng-repeat="resource in learningResources"><a ng-href="{{resource.url}}" target="_blank">{{resource.name}}</a></li>
             </ul>
           </div>
           <div class="links-column">
-            <h3>Follow Us</h3>
+            <h3>Community</h3>
             <ul class="links-list social-links">
-              <li ng-repeat="social in socialLinks"><a ng-href="{{social.url}}" class="social-link {{social.icon}}">{{social.name}}</a></li>
+              <li ng-repeat="social in socialLinks"><a ng-href="{{social.url}}" target="_blank" class="social-link {{social.icon}}">{{social.name}}</a></li>
             </ul>
           </div>
         </div>
@@ -163,24 +262,23 @@
       <div class="footer-content">
         <div class="footer-logo">
           <span class="heading-logo">Engineering<span class="highlight">Hacks</span></span>
-          <p>Free developer tools to streamline your workflow.</p>
+          <p>Empowering developers and students with free tools and resources.</p>
         </div>
         <div class="footer-links">
           <div class="footer-column">
-            <h4>Site</h4>
+            <h4>Tools</h4>
             <ul>
-              <li><a href="/">Home</a></li>
-              <li><a href="/about">About</a></li>
-              <li><a href="/blog">Blog</a></li>
-              <li><a href="/contact">Contact</a></li>
+              <li><a href="resume-builder.html">Resume Builder</a></li>
+              <li><a href="meme-editor.html">Meme Editor</a></li>
+              <li><a href="fomatting-tools.html">Developer Tools</a></li>
             </ul>
           </div>
           <div class="footer-column">
-            <h4>Legal</h4>
+            <h4>Resources</h4>
             <ul>
-              <li><a href="/privacy">Privacy Policy</a></li>
-              <li><a href="/terms">Terms of Service</a></li>
-              <li><a href="/cookies">Cookie Policy</a></li>
+              <li><a href="#courses">Free Courses</a></li>
+              <li><a href="#news">Tech News</a></li>
+              <li><a href="/blog">Blog</a></li>
             </ul>
           </div>
           <div class="footer-column">
@@ -204,11 +302,7 @@
   
   <!-- Scripts -->
   <script src="Scripts/app.js"></script>
-  <script src="Scripts/controller.js"></script>
+  <script src="JavaScript/home.js"></script>
   <script src="Scripts/theme-toggle.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify-css.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/js-beautify/js/lib/beautify-html.js"></script>
 </body>
 </html>
