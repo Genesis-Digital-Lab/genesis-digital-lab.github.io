@@ -1,0 +1,65 @@
+<div class="resume-template minimal-template" style="font-family: 'Helvetica Neue', Arial, sans-serif; max-width: 800px; margin: 0 auto; line-height: 1.6; color: #333;">
+  <div class="resume-header" style="border-bottom: 1px solid #eee; padding-bottom: 2rem; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; gap: 2rem;">
+      <img ng-if="resumeData.personal.photo" ng-src="{{resumeData.personal.photo}}" alt="Profile Photo" style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover;">
+      <div style="flex: 1;">
+        <h1 style="font-size: 2.5rem; font-weight: 300; margin: 0; color: #333;">{{resumeData.personal.firstName}} {{resumeData.personal.lastName}}</h1>
+        <div class="contact-info" style="color: #666; margin-top: 0.5rem; font-size: 0.95rem;">
+          <div ng-if="resumeData.personal.email">{{resumeData.personal.email}}</div>
+          <div ng-if="resumeData.personal.phone">{{resumeData.personal.phone}}</div>
+          <div ng-if="resumeData.personal.address">{{resumeData.personal.address}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="social-links" style="margin-top: 1rem; display: flex; gap: 1.5rem; font-size: 0.9rem;">
+      <a ng-if="resumeData.social.linkedin" ng-href="{{resumeData.social.linkedin}}" target="_blank" style="color: #666; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px;">LinkedIn</a>
+      <a ng-if="resumeData.social.github" ng-href="{{resumeData.social.github}}" target="_blank" style="color: #666; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px;">GitHub</a>
+      <a ng-if="resumeData.social.leetcode" ng-href="{{resumeData.social.leetcode}}" target="_blank" style="color: #666; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px;">LeetCode</a>
+      <a ng-if="resumeData.social.hackerrank" ng-href="{{resumeData.social.hackerrank}}" target="_blank" style="color: #666; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px;">HackerRank</a>
+      <a ng-if="resumeData.social.portfolio" ng-href="{{resumeData.social.portfolio}}" target="_blank" style="color: #666; text-decoration: none; border-bottom: 1px solid #ddd; padding-bottom: 2px;">Portfolio</a>
+    </div>
+  </div>
+
+  <div ng-if="resumeData.summary" class="resume-section" style="margin-bottom: 2rem;">
+    <h3 style="font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; margin-bottom: 1rem;">Summary</h3>
+    <p style="color: #555; line-height: 1.7; margin: 0;">{{resumeData.summary}}</p>
+  </div>
+
+  <div ng-if="resumeData.experience.length > 0" class="resume-section" style="margin-bottom: 2rem;">
+    <h3 style="font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; margin-bottom: 1rem;">Experience</h3>
+    <div ng-repeat="exp in resumeData.experience" class="experience-item" style="margin-bottom: 2rem;">
+      <div style="display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 0.5rem;">
+        <h4 style="font-size: 1.1rem; font-weight: 500; color: #333; margin: 0;">{{exp.position}}</h4>
+        <span style="color: #666; font-size: 0.9rem;">{{exp.startDate}} - {{exp.endDate}}</span>
+      </div>
+      <h5 style="color: #666; font-weight: 400; margin: 0 0 1rem 0;">{{exp.company}}</h5>
+      <p style="color: #555; line-height: 1.6; margin: 0;">{{exp.description}}</p>
+    </div>
+  </div>
+
+  <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 3rem;">
+    <div ng-if="resumeData.skills.length > 0" class="resume-section">
+      <h3 style="font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; margin-bottom: 1rem;">Skills</h3>
+      <div style="color: #555; line-height: 1.8;">
+        <span ng-repeat="skill in resumeData.skills">{{skill}}<span ng-if="!$last">, </span></span>
+      </div>
+    </div>
+
+    <div ng-if="resumeData.education.length > 0" class="resume-section">
+      <h3 style="font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; margin-bottom: 1rem;">Education</h3>
+      <div ng-repeat="edu in resumeData.education" class="education-item" style="margin-bottom: 1.5rem;">
+        <h4 style="font-size: 1rem; font-weight: 500; color: #333; margin: 0;">{{edu.degree}}</h4>
+        <p style="color: #666; margin: 0.25rem 0;">{{edu.field}}</p>
+        <p style="color: #666; font-size: 0.9rem; margin: 0;">{{edu.institution}} | {{edu.startYear}} - {{edu.endYear}}</p>
+      </div>
+    </div>
+  </div>
+
+  <div ng-if="resumeData.certifications.length > 0" class="resume-section" style="margin-top: 2rem;">
+    <h3 style="font-size: 1.1rem; font-weight: 600; text-transform: uppercase; letter-spacing: 1px; color: #333; margin-bottom: 1rem;">Certifications</h3>
+    <div ng-repeat="cert in resumeData.certifications" class="certification-item" style="margin-bottom: 1rem;">
+      <h4 style="font-size: 1rem; font-weight: 500; color: #333; margin: 0;">{{cert.name}}</h4>
+      <p style="color: #666; margin: 0.25rem 0 0 0;">{{cert.issuer}} | {{cert.date}}</p>
+    </div>
+  </div>
+</div>

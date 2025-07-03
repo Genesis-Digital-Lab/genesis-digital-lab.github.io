@@ -1,0 +1,68 @@
+<div class="resume-template executive-template">
+  <div class="resume-header" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; padding: 2rem;">
+    <div style="display: flex; align-items: center; gap: 2rem;">
+      <img ng-if="resumeData.personal.photo" ng-src="{{resumeData.personal.photo}}" alt="Profile Photo" style="border: 3px solid white;">
+      <div>
+        <h1 style="color: white; margin-bottom: 0.5rem;">{{resumeData.personal.firstName}} {{resumeData.personal.lastName}}</h1>
+        <div class="contact-info" style="color: rgba(255,255,255,0.9);">
+          <div ng-if="resumeData.personal.email">{{resumeData.personal.email}}</div>
+          <div ng-if="resumeData.personal.phone">{{resumeData.personal.phone}}</div>
+          <div ng-if="resumeData.personal.address">{{resumeData.personal.address}}</div>
+        </div>
+      </div>
+    </div>
+    <div class="social-links" style="margin-top: 1rem;">
+      <a ng-if="resumeData.social.linkedin" ng-href="{{resumeData.social.linkedin}}" target="_blank" style="color: white;">LinkedIn</a>
+      <a ng-if="resumeData.social.github" ng-href="{{resumeData.social.github}}" target="_blank" style="color: white;">GitHub</a>
+      <a ng-if="resumeData.social.leetcode" ng-href="{{resumeData.social.leetcode}}" target="_blank" style="color: white;">LeetCode</a>
+      <a ng-if="resumeData.social.hackerrank" ng-href="{{resumeData.social.hackerrank}}" target="_blank" style="color: white;">HackerRank</a>
+      <a ng-if="resumeData.social.portfolio" ng-href="{{resumeData.social.portfolio}}" target="_blank" style="color: white;">Portfolio</a>
+    </div>
+  </div>
+
+  <div style="padding: 2rem;">
+    <div ng-if="resumeData.summary" class="resume-section">
+      <h3 style="color: #667eea;">Executive Summary</h3>
+      <p style="font-size: 1.1rem; line-height: 1.8;">{{resumeData.summary}}</p>
+    </div>
+
+    <div ng-if="resumeData.experience.length > 0" class="resume-section">
+      <h3 style="color: #667eea;">Professional Experience</h3>
+      <div ng-repeat="exp in resumeData.experience" class="experience-item" style="margin-bottom: 2rem;">
+        <h4 style="color: #333; margin-bottom: 0.5rem;">{{exp.position}}</h4>
+        <h5 style="color: #667eea; margin-bottom: 0.5rem;">{{exp.company}}</h5>
+        <p style="color: #666; font-style: italic; margin-bottom: 1rem;">{{exp.startDate}} - {{exp.endDate}}</p>
+        <p style="line-height: 1.6;">{{exp.description}}</p>
+      </div>
+    </div>
+
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 2rem;">
+      <div ng-if="resumeData.skills.length > 0" class="resume-section">
+        <h3 style="color: #667eea;">Core Competencies</h3>
+        <ul style="list-style: none; padding: 0;">
+          <li ng-repeat="skill in resumeData.skills" style="padding: 0.25rem 0; border-bottom: 1px solid #eee;">{{skill}}</li>
+        </ul>
+      </div>
+
+      <div ng-if="resumeData.education.length > 0" class="resume-section">
+        <h3 style="color: #667eea;">Education</h3>
+        <div ng-repeat="edu in resumeData.education" class="education-item" style="margin-bottom: 1rem;">
+          <h4 style="color: #333;">{{edu.degree}}</h4>
+          <p style="color: #667eea;">{{edu.field}}</p>
+          <p style="color: #666;">{{edu.institution}} | {{edu.startYear}} - {{edu.endYear}}</p>
+        </div>
+      </div>
+    </div>
+
+    <div ng-if="resumeData.certifications.length > 0" class="resume-section">
+      <h3 style="color: #667eea;">Certifications</h3>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1rem;">
+        <div ng-repeat="cert in resumeData.certifications" class="certification-item" style="background: #f8f9fa; padding: 1rem; border-radius: 8px;">
+          <h4 style="color: #333; margin-bottom: 0.5rem;">{{cert.name}}</h4>
+          <p style="color: #667eea; margin-bottom: 0.25rem;">{{cert.issuer}}</p>
+          <p style="color: #666; margin: 0;">{{cert.date}}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

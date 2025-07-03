@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resume Builder - Engineering Hacks</title>
+  
+  <!-- AngularJS -->
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.9/angular.min.js"></script>
+  
+  <!-- Bootstrap CSS -->
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet">
+  
+  <!-- Font Awesome -->
+  <link href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  
+  <!-- jsPDF for PDF generation -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+  
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="Styles/main.css">
+  <link rel="stylesheet" href="Styles/header.css">
+  <link rel="stylesheet" href="Styles/footer.css">
+  <link rel="stylesheet" href="CSS/resume-builder.css">
+</head>
+<body ng-app="engineeringHacks" ng-controller="resumeBuilderController">
+  <!-- Header -->
+  <header class="site-header">
+    <div class="container">
+      <div class="header-content">
+        <div class="logo">
+          <a href="/">
+            <span class="heading-logo">Engineering<span class="highlight">Hacks</span></span>
+          </a>
+        </div>
+        <nav class="main-nav" ng-class="{'active': isMenuOpen}">
+          <ul>
+            <li><a href="fomatting-tools.html">Tools</a></li>
+            <li><a href="resume-builder.html" class="active">Resume Builder</a></li>
+            <li><a href="meme-editor.html">Meme Editor</a></li>
+            <li><a href="#contact">Contact</a></li>
+          </ul>
+        </nav>
+        <div class="header-actions">
+          <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme" ng-click="toggleTheme()">
+            <i class="fa" ng-class="{'fa-sun-o': theme === 'dark', 'fa-moon-o': theme === 'light'}"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <div class="resume-builder-wrapper">
+    <!-- Left Sidebar - Form -->
+    <div class="resume-form-sidebar">
+      <div class="form-container">
+        <h3>Build Your Resume</h3>
+        
+        <!-- Personal Information -->
+        <div class="form-section">
+          <h5><i class="fa fa-user"></i> Personal Information</h5>
+          <div class="row">
+            <div class="col-md-6">
+              <input type="text" class="form-control" ng-model="resumeData.personal.firstName" placeholder="First Name">
+            </div>
+            <div class="col-md-6">
+              <input type="text" class="form-control" ng-model="resumeData.personal.lastName" placeholder="Last Name">
+            </div>
+          </div>
+          <input type="email" class="form-control" ng-model="resumeData.personal.email" placeholder="Email">
+          <input type="tel" class="form-control" ng-model="resumeData.personal.phone" placeholder="Phone Number">
+          <textarea class="form-control" ng-model="resumeData.personal.address" placeholder="Address" rows="2"></textarea>
+          
+          <!-- Photo Upload -->
+          <div class="photo-upload">
+            <label>Profile Photo</label>
+            <input type="file" id="photoUpload" accept="image/*" onchange="angular.element(this).scope().handlePhotoUpload(event)">
+            <div class="photo-preview" ng-if="resumeData.personal.photo">
+              <img ng-src="{{resumeData.personal.photo}}" alt="Profile Photo">
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Profiles -->
+        <div class="form-section">
+          <h5><i class="fa fa-globe"></i> Social Profiles</h5>
+          <input type="url" class="form-control" ng-model="resumeData.social.linkedin" placeholder="LinkedIn Profile">
+          <input type="url" class="form-control" ng-model="resumeData.social.github" placeholder="GitHub Profile">
+          <input type="url" class="form-control" ng-model="resumeData.social.leetcode" placeholder="LeetCode Profile">
+          <input type="url" class="form-control" ng-model="resumeData.social.hackerrank" placeholder="HackerRank Profile">
+          <input type="url" class="form-control" ng-model="resumeData.social.portfolio" placeholder="Portfolio Website">
+        </div>
+
+        <!-- Professional Summary -->
+        <div class="form-section">
+          <h5><i class="fa fa-file-text"></i> Professional Summary</h5>
+          <textarea class="form-control" ng-model="resumeData.summary" placeholder="Write a brief professional summary..." rows="4"></textarea>
+        </div>
+
+        <!-- Skills -->
+        <div class="form-section">
+          <h5><i class="fa fa-cogs"></i> Skills</h5>
+          <div class="skill-input">
+            <input type="text" class="form-control" ng-model="newSkill" placeholder="Add a skill" ng-keypress="addSkill($event)">
+            <button class="btn btn-primary btn-sm" ng-click="addSkill()">Add</button>
+          </div>
+          <div class="skills-list">
+            <span class="skill-tag" ng-repeat="skill in resumeData.skills">
+              {{skill}}
+              <i class="fa fa-times" ng-click="removeSkill($index)"></i>
+            </span>
+          </div>
+        </div>
+
+        <!-- Experience -->
+        <div class="form-section">
+          <h5><i class="fa fa-briefcase"></i> Experience</h5>
+          <div class="experience-item" ng-repeat="exp in resumeData.experience">
+            <input type="text" class="form-control" ng-model="exp.company" placeholder="Company Name">
+            <input type="text" class="form-control" ng-model="exp.position" placeholder="Position">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="exp.startDate" placeholder="Start Date">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="exp.endDate" placeholder="End Date">
+              </div>
+            </div>
+            <textarea class="form-control" ng-model="exp.description" placeholder="Job description..." rows="3"></textarea>
+            <button class="btn btn-danger btn-sm" ng-click="removeExperience($index)">Remove</button>
+          </div>
+          <button class="btn btn-outline-primary" ng-click="addExperience()">Add Experience</button>
+        </div>
+
+        <!-- Education -->
+        <div class="form-section">
+          <h5><i class="fa fa-graduation-cap"></i> Education</h5>
+          <div class="education-item" ng-repeat="edu in resumeData.education">
+            <input type="text" class="form-control" ng-model="edu.institution" placeholder="Institution Name">
+            <input type="text" class="form-control" ng-model="edu.degree" placeholder="Degree">
+            <input type="text" class="form-control" ng-model="edu.field" placeholder="Field of Study">
+            <div class="row">
+              <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="edu.startYear" placeholder="Start Year">
+              </div>
+              <div class="col-md-6">
+                <input type="text" class="form-control" ng-model="edu.endYear" placeholder="End Year">
+              </div>
+            </div>
+            <button class="btn btn-danger btn-sm" ng-click="removeEducation($index)">Remove</button>
+          </div>
+          <button class="btn btn-outline-primary" ng-click="addEducation()">Add Education</button>
+        </div>
+
+        <!-- Certifications -->
+        <div class="form-section">
+          <h5><i class="fa fa-certificate"></i> Certifications</h5>
+          <div class="certification-item" ng-repeat="cert in resumeData.certifications">
+            <input type="text" class="form-control" ng-model="cert.name" placeholder="Certification Name">
+            <input type="text" class="form-control" ng-model="cert.issuer" placeholder="Issuing Organization">
+            <input type="text" class="form-control" ng-model="cert.date" placeholder="Date Obtained">
+            <button class="btn btn-danger btn-sm" ng-click="removeCertification($index)">Remove</button>
+          </div>
+          <button class="btn btn-outline-primary" ng-click="addCertification()">Add Certification</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Center - Template Selection -->
+    <div class="template-selection">
+      <h4>Choose Template</h4>
+      <div class="template-grid">
+        <div class="template-card" ng-repeat="template in templates" ng-class="{'active': selectedTemplate === template.id}" ng-click="selectTemplate(template.id)">
+          <div class="template-preview">
+            <img ng-src="{{template.preview}}" alt="{{template.name}}">
+          </div>
+          <h6>{{template.name}}</h6>
+          <p>{{template.description}}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Right Sidebar - Preview -->
+    <div class="resume-preview">
+      <div class="preview-header">
+        <h4>Preview</h4>
+        <div class="preview-actions">
+          <button class="btn btn-primary" ng-click="downloadPDF()">
+            <i class="fa fa-file-pdf-o"></i> PDF
+          </button>
+          <button class="btn btn-success" ng-click="downloadDOC()">
+            <i class="fa fa-file-word-o"></i> DOC
+          </button>
+          <button class="btn btn-info" ng-click="downloadHTML()">
+            <i class="fa fa-code"></i> HTML
+          </button>
+        </div>
+      </div>
+      
+      <div class="resume-preview-content" id="resumePreview">
+        <div ng-include="getTemplateUrl()"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-logo">
+          <span class="heading-logo">Engineering<span class="highlight">Hacks</span></span>
+          <p>Free developer tools to streamline your workflow.</p>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2025 Engineering Hacks. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Bootstrap JS -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"></script>
+  
+  <!-- Scripts -->
+  <script src="Scripts/app.js"></script>
+  <script src="JavaScript/resume-builder.js"></script>
+</body>
+</html>
