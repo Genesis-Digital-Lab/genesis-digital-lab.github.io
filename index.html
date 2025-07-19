@@ -162,7 +162,7 @@
       <div class="container">
         <h2 class="section-title animate-on-scroll fade-up">Latest Developer News</h2>
         <div class="news-grid">
-          <article class="news-card animate-on-scroll fade-up delay-1" ng-repeat="article in developerNews">
+          <article class="news-card animate-on-scroll fade-up delay-1" ng-repeat="article in developerNews track by $index">
             <div class="news-image">
               <img ng-src="{{article.image}}" alt="{{article.title}}">
               <div class="news-category">{{article.category}}</div>
@@ -200,7 +200,7 @@
         </div>
 
         <div class="courses-grid">
-          <div class="course-card animate-on-scroll fade-up" ng-repeat="course in filteredCourses" ng-show="course.visible">
+          <div class="course-card animate-on-scroll fade-up" ng-repeat="course in filteredCourses track by $index" ng-show="course.visible">
             <div class="course-image">
               <img ng-src="{{course.image}}" alt="{{course.title}}">
               <div class="course-level">{{course.level}}</div>
@@ -211,12 +211,12 @@
               <h3>{{course.title}}</h3>
               <p>{{course.description}}</p>
               <div class="course-skills">
-                <span class="skill-tag" ng-repeat="skill in course.skills">{{skill}}</span>
+                <span class="skill-tag" ng-repeat="skill in course.skills track by $index">{{skill}}</span>
               </div>
               <div class="course-footer">
                 <div class="course-rating">
                   <div class="stars">
-                    <i class="fa fa-star" ng-repeat="star in getStars(course.rating)"></i>
+                    <i class="fa fa-star" ng-repeat="star in getStars(course.rating) track by $index"></i>
                   </div>
                   <span>{{course.rating}} ({{course.reviews}} reviews)</span>
                 </div>
@@ -237,19 +237,19 @@
           <div class="links-column">
             <h3>Developer Tools</h3>
             <ul class="links-list">
-              <li ng-repeat="tool in developerTools"><a ng-href="{{tool.url}}">{{tool.name}}</a></li>
+              <li ng-repeat="tool in developerTools track by $index"><a ng-href="{{tool.url}}">{{tool.name}}</a></li>
             </ul>
           </div>
           <div class="links-column">
             <h3>Learning Resources</h3>
             <ul class="links-list">
-              <li ng-repeat="resource in learningResources"><a ng-href="{{resource.url}}" target="_blank">{{resource.name}}</a></li>
+              <li ng-repeat="resource in learningResources track by $index"><a ng-href="{{resource.url}}" target="_blank">{{resource.name}}</a></li>
             </ul>
           </div>
           <div class="links-column">
             <h3>Community</h3>
             <ul class="links-list social-links">
-              <li ng-repeat="social in socialLinks"><a ng-href="{{social.url}}" target="_blank" class="social-link {{social.icon}}">{{social.name}}</a></li>
+              <li ng-repeat="social in socialLinks track by $index"><a ng-href="{{social.url}}" target="_blank" class="social-link {{social.icon}}">{{social.name}}</a></li>
             </ul>
           </div>
         </div>
